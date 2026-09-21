@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Saeed AlMalki — IT Infrastructure & Systems Engineer</title>
+<meta name="description" content="Saeed AlMalki — Senior IT Infrastructure & Systems Engineer. Windows Server, Active Directory, Virtualization (Hyper-V, Nutanix, VMware, Citrix), Microsoft Azure, secure operations aligned with SAMA & NCA ECC." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg:#070b14;--bg-2:#0b1220;--card:#0e1626;--card-2:#111c30;
+    --line:rgba(120,160,220,.12);--line-strong:rgba(120,160,220,.28);
+    --text:#e8eefc;--muted:#8aa0c4;--dim:#5f74a0;
+    --accent:#2ee6c8;--accent-2:#4f9bff;--accent-3:#7c5cff;
+    --glow:rgba(46,230,200,.35);--radius:16px;--maxw:1080px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+  html[lang="ar"] body{font-family:'Tajawal','Inter',sans-serif}
+  html[lang="ar"] h1,html[lang="ar"] h2,html[lang="ar"] h3{font-family:'Tajawal',sans-serif}
+  #net{position:fixed;inset:0;z-index:0;opacity:.55}
+  .wrap{position:relative;z-index:2;max-width:var(--maxw);margin:0 auto;padding:0 24px}
+  h1,h2,h3,.mono{font-family:'Space Grotesk',sans-serif}
+  a{color:inherit;text-decoration:none}
+
+  nav{position:fixed;top:0;left:0;right:0;z-index:50;backdrop-filter:blur(14px);background:rgba(7,11,20,.6);border-bottom:1px solid transparent;transition:.35s}
+  nav.scrolled{background:rgba(7,11,20,.85);border-bottom:1px solid var(--line)}
+  .nav-in{max-width:var(--maxw);margin:0 auto;padding:16px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+  .brand{font-family:'Space Grotesk';font-weight:700;letter-spacing:.5px;font-size:18px;display:flex;align-items:center;gap:10px}
+  .brand .dot{width:9px;height:9px;border-radius:50%;background:var(--accent);box-shadow:0 0 14px var(--glow);animation:pulse 2s infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+  .nav-right{display:flex;align-items:center;gap:22px}
+  .nav-links{display:flex;gap:26px;align-items:center}
+  .nav-links a{font-size:14px;color:var(--muted);transition:.25s;position:relative}
+  .nav-links a:hover{color:var(--text)}
+  .nav-links a::after{content:'';position:absolute;left:0;bottom:-6px;width:0;height:2px;background:var(--accent);transition:.25s}
+  .nav-links a:hover::after{width:100%}
+  .lang{cursor:pointer;font-family:'JetBrains Mono';font-size:13px;color:var(--text);border:1px solid var(--line-strong);border-radius:9px;padding:6px 12px;background:rgba(46,230,200,.05);transition:.25s;white-space:nowrap}
+  .lang:hover{border-color:var(--accent);color:var(--accent)}
+  .burger{display:none;flex-direction:column;gap:5px;cursor:pointer}
+  .burger span{width:24px;height:2px;background:var(--text);border-radius:2px;transition:.3s}
+
+  header{min-height:100vh;display:flex;align-items:center;padding:120px 0 80px;position:relative}
+  .status{display:inline-flex;align-items:center;gap:9px;padding:7px 15px;border:1px solid var(--line-strong);border-radius:999px;font-size:13px;color:var(--muted);background:rgba(46,230,200,.05);margin-bottom:26px;animation:fadeUp .7s both}
+  .status .live{width:8px;height:8px;border-radius:50%;background:#2ee6c8;box-shadow:0 0 10px var(--glow);animation:pulse 1.6s infinite}
+  .hero-name{font-size:clamp(40px,8vw,84px);font-weight:700;line-height:1.02;letter-spacing:-1.5px;animation:fadeUp .7s .05s both}
+  .hero-name .grad{background:linear-gradient(120deg,var(--accent),var(--accent-2) 55%,var(--accent-3));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .hero-ar{font-size:clamp(18px,3vw,26px);color:var(--muted);margin-top:6px;font-family:'Tajawal',sans-serif;animation:fadeUp .7s .12s both}
+  .role-line{margin-top:22px;font-size:clamp(16px,2.4vw,22px);color:var(--text);font-family:'JetBrains Mono';min-height:34px;animation:fadeUp .7s .18s both;direction:ltr}
+  html[lang="ar"] .role-line{text-align:right}
+  .role-line .prompt{color:var(--accent)}
+  .role-line .cursor{display:inline-block;width:9px;height:20px;background:var(--accent);margin-left:2px;vertical-align:-3px;animation:blink 1s steps(2) infinite}
+  @keyframes blink{50%{opacity:0}}
+  .hero-sub{margin-top:24px;max-width:640px;color:var(--muted);font-size:16.5px;animation:fadeUp .7s .24s both}
+  .cta{display:flex;gap:14px;margin-top:36px;flex-wrap:wrap;animation:fadeUp .7s .3s both}
+  .btn{display:inline-flex;align-items:center;gap:9px;padding:13px 22px;border-radius:12px;font-size:14.5px;font-weight:600;transition:.28s;cursor:pointer;border:1px solid transparent}
+  .btn-primary{background:linear-gradient(120deg,var(--accent),var(--accent-2));color:#04121a;box-shadow:0 8px 30px -8px var(--glow)}
+  .btn-primary:hover{transform:translateY(-3px);box-shadow:0 14px 40px -8px var(--glow)}
+  .btn-ghost{border:1px solid var(--line-strong);color:var(--text);background:rgba(255,255,255,.02)}
+  .btn-ghost:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-3px)}
+  .scroll-hint{position:absolute;bottom:30px;left:50%;transform:translateX(-50%);color:var(--dim);font-size:12px;letter-spacing:2px;text-transform:uppercase;display:flex;flex-direction:column;align-items:center;gap:8px;animation:fadeUp 1s 1s both}
+  .scroll-hint .mouse{width:22px;height:34px;border:2px solid var(--line-strong);border-radius:12px;position:relative}
+  .scroll-hint .mouse::after{content:'';position:absolute;top:6px;left:50%;transform:translateX(-50%);width:4px;height:7px;border-radius:2px;background:var(--accent);animation:scrolldot 1.6s infinite}
+  @keyframes scrolldot{0%{opacity:0;top:6px}40%{opacity:1}80%{opacity:0;top:16px}}
+
+  section{padding:100px 0;position:relative}
+  .sec-tag{font-family:'JetBrains Mono';font-size:13px;color:var(--accent);letter-spacing:1px;margin-bottom:12px;display:flex;align-items:center;gap:10px}
+  .sec-tag::before{content:'';width:26px;height:1px;background:var(--accent)}
+  .sec-title{font-size:clamp(28px,5vw,44px);font-weight:700;letter-spacing:-.5px;margin-bottom:16px}
+  html[lang="ar"] .sec-title{letter-spacing:0}
+  .sec-intro{color:var(--muted);max-width:620px;margin-bottom:48px;font-size:16px}
+  .reveal{opacity:0;transform:translateY(28px);transition:.7s cubic-bezier(.2,.7,.2,1)}
+  .reveal.in{opacity:1;transform:none}
+
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:60px}
+  .stat{background:linear-gradient(160deg,var(--card),var(--card-2));border:1px solid var(--line);border-radius:var(--radius);padding:26px 22px;text-align:center;transition:.3s}
+  .stat:hover{border-color:var(--line-strong);transform:translateY(-4px)}
+  .stat .num{font-family:'Space Grotesk';font-size:40px;font-weight:700;background:linear-gradient(120deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1;direction:ltr}
+  .stat .lbl{color:var(--muted);font-size:13px;margin-top:8px}
+
+  .about-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:40px;align-items:start}
+  .about-txt p{color:var(--muted);margin-bottom:16px;font-size:16px}
+  .about-txt strong{color:var(--text);font-weight:600}
+  .info-card{background:linear-gradient(160deg,var(--card),var(--card-2));border:1px solid var(--line);border-radius:var(--radius);padding:26px}
+  .info-row{display:flex;justify-content:space-between;padding:13px 0;border-bottom:1px solid var(--line);font-size:14.5px;gap:12px}
+  .info-row:last-child{border-bottom:none}
+  .info-row .k{color:var(--dim)}
+  .info-row .v{color:var(--text);font-weight:500;text-align:right}
+  html[dir="rtl"] .info-row .v{text-align:left}
+  .chip-ok{color:#2ee6c8}
+
+  .skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px}
+  .skill-card{background:linear-gradient(160deg,var(--card),var(--card-2));border:1px solid var(--line);border-radius:var(--radius);padding:24px;transition:.3s;position:relative;overflow:hidden}
+  .skill-card::before{content:'';position:absolute;top:0;left:0;width:100%;height:2px;background:linear-gradient(90deg,var(--accent),transparent);transform:scaleX(0);transform-origin:left;transition:.4s}
+  .skill-card:hover{border-color:var(--line-strong);transform:translateY(-5px)}
+  .skill-card:hover::before{transform:scaleX(1)}
+  .skill-card .ico{width:44px;height:44px;border-radius:11px;background:rgba(46,230,200,.1);border:1px solid var(--line-strong);display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:16px}
+  .skill-card h3{font-size:17px;margin-bottom:12px}
+  .tags{display:flex;flex-wrap:wrap;gap:8px}
+  .tag{font-size:12.5px;padding:5px 11px;border-radius:8px;background:rgba(120,160,220,.08);border:1px solid var(--line);color:var(--muted);font-family:'JetBrains Mono';direction:ltr}
+
+  .timeline{position:relative;padding-left:34px}
+  .timeline::before{content:'';position:absolute;left:8px;top:6px;bottom:6px;width:2px;background:linear-gradient(var(--accent),var(--accent-3),transparent)}
+  html[dir="rtl"] .timeline{padding-left:0;padding-right:34px}
+  html[dir="rtl"] .timeline::before{left:auto;right:8px}
+  .tl-item{position:relative;padding-bottom:44px}
+  .tl-item:last-child{padding-bottom:0}
+  .tl-item::before{content:'';position:absolute;left:-34px;top:4px;width:18px;height:18px;border-radius:50%;background:var(--bg);border:2px solid var(--accent);box-shadow:0 0 0 4px rgba(46,230,200,.1)}
+  html[dir="rtl"] .tl-item::before{left:auto;right:-34px}
+  .tl-top{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;align-items:baseline}
+  .tl-role{font-family:'Space Grotesk';font-size:19px;font-weight:600}
+  html[lang="ar"] .tl-role{font-family:'Tajawal',sans-serif}
+  .tl-co{color:var(--accent-2);font-size:15px;font-weight:500;margin-top:2px}
+  .tl-date{font-family:'JetBrains Mono';font-size:13px;color:var(--dim);white-space:nowrap;direction:ltr}
+  .tl-loc{color:var(--dim);font-size:13px;margin:4px 0 14px}
+  .tl-list{list-style:none;display:flex;flex-direction:column;gap:8px}
+  .tl-list li{color:var(--muted);font-size:14.5px;padding-left:20px;position:relative}
+  html[dir="rtl"] .tl-list li{padding-left:0;padding-right:20px}
+  .tl-list li::before{content:'▹';position:absolute;left:0;color:var(--accent)}
+  html[dir="rtl"] .tl-list li::before{content:'◃';left:auto;right:0}
+  .badge-now{font-size:11px;font-family:'JetBrains Mono';color:#04121a;background:var(--accent);padding:2px 9px;border-radius:6px;font-weight:600;margin-left:8px;vertical-align:2px}
+  html[dir="rtl"] .badge-now{margin-left:0;margin-right:8px}
+
+  .cert-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:16px}
+  .cert{background:linear-gradient(160deg,var(--card),var(--card-2));border:1px solid var(--line);border-radius:14px;padding:20px;transition:.3s;display:flex;gap:14px;align-items:flex-start}
+  .cert:hover{border-color:var(--line-strong);transform:translateY(-4px)}
+  .cert .cico{font-size:22px;line-height:1;margin-top:2px}
+  .cert h4{font-size:14.5px;font-weight:600;line-height:1.35}
+  .cert .issuer{color:var(--dim);font-size:12.5px;margin-top:5px;font-family:'JetBrains Mono'}
+  html[lang="ar"] .cert .issuer{font-family:'Tajawal',sans-serif}
+  .cert .yr{color:var(--accent);font-size:11.5px;margin-top:6px;font-family:'JetBrains Mono'}
+  .cert.prog{border-color:rgba(124,92,255,.35)}
+  .cert.prog .yr{color:var(--accent-3)}
+
+  .proj-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+  .proj{background:linear-gradient(160deg,var(--card),var(--card-2));border:1px solid var(--line);border-radius:var(--radius);padding:28px;transition:.35s;position:relative;overflow:hidden;display:block}
+  .proj::after{content:'';position:absolute;inset:0;background:radial-gradient(400px circle at var(--mx,50%) var(--my,0%),rgba(46,230,200,.08),transparent 60%);opacity:0;transition:.4s;pointer-events:none}
+  .proj:hover{border-color:var(--line-strong);transform:translateY(-6px)}
+  .proj:hover::after{opacity:1}
+  .proj-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
+  .proj-ico{font-size:30px}
+  .proj-link{color:var(--muted);font-size:13px;font-family:'JetBrains Mono';display:inline-flex;gap:6px;align-items:center;transition:.25s}
+  .proj:hover .proj-link{color:var(--accent)}
+  .proj h3{font-size:20px;margin-bottom:10px}
+  .proj p{color:var(--muted);font-size:14.5px;margin-bottom:16px}
+  .proj .tags{margin-top:4px}
+
+  .contact{text-align:center;padding:120px 0}
+  .contact h2{font-size:clamp(30px,6vw,52px);margin-bottom:16px}
+  .contact p{color:var(--muted);max-width:520px;margin:0 auto 36px;font-size:17px}
+  .social{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+  .social a{display:inline-flex;align-items:center;gap:10px;padding:14px 24px;border:1px solid var(--line-strong);border-radius:12px;transition:.3s;font-size:15px;font-weight:500}
+  .social a:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-3px);background:rgba(46,230,200,.04)}
+  footer{border-top:1px solid var(--line);padding:34px 0;text-align:center;color:var(--dim);font-size:13px;font-family:'JetBrains Mono'}
+  html[lang="ar"] footer{font-family:'Tajawal',sans-serif}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+
+  @media(max-width:860px){
+    .about-grid{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}.proj-grid{grid-template-columns:1fr}
+    .nav-links{position:fixed;inset:0 0 0 auto;width:74%;max-width:320px;flex-direction:column;justify-content:center;gap:34px;background:rgba(9,14,25,.97);backdrop-filter:blur(20px);transform:translateX(100%);transition:.4s;border-left:1px solid var(--line)}
+    .nav-links.open{transform:none}.nav-links a{font-size:19px}
+    .burger{display:flex}
+    .burger.x span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+    .burger.x span:nth-child(2){opacity:0}
+    .burger.x span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+  }
+  @media(max-width:520px){.stats{grid-template-columns:1fr 1fr}.cta{flex-direction:column}.btn{justify-content:center}}
+</style>
+</head>
+<body>
+<canvas id="net"></canvas>
+
+<nav id="nav">
+  <div class="nav-in">
+    <a href="#top" class="brand"><span class="dot"></span>Saeed<span style="color:var(--muted);font-weight:400">.AlMalki</span></a>
+    <div class="nav-right">
+      <div class="nav-links" id="navlinks">
+        <a href="#about" data-i18n="nav_about">About</a>
+        <a href="#skills" data-i18n="nav_skills">Skills</a>
+        <a href="#experience" data-i18n="nav_exp">Experience</a>
+        <a href="#certs" data-i18n="nav_certs">Certifications</a>
+        <a href="#projects" data-i18n="nav_proj">Projects</a>
+        <a href="#contact" data-i18n="nav_contact">Contact</a>
+      </div>
+      <div class="lang" id="langBtn">العربية</div>
+      <div class="burger" id="burger"><span></span><span></span><span></span></div>
+    </div>
+  </div>
+</nav>
+
+<header id="top">
+  <div class="wrap">
+    <div class="status"><span class="live"></span> <span data-i18n="hero_status">Open to Senior Infrastructure / Systems Engineering roles · Riyadh</span></div>
+    <h1 class="hero-name">Saeed <span class="grad">AlMalki</span></h1>
+    <div class="hero-ar">سعيد المالكي</div>
+    <div class="role-line"><span class="prompt">~$</span> <span id="typed"></span><span class="cursor"></span></div>
+    <p class="hero-sub" data-i18n="hero_sub">Senior IT Infrastructure &amp; Systems Engineer with 5+ years designing, operating, and securing enterprise environments — including 3+ years at Riyad Bank. I build reliable, highly-available, and secure hybrid infrastructure.</p>
+    <div class="cta">
+      <a class="btn btn-primary" href="#contact" data-i18n="hero_cta1">Let's connect →</a>
+      <a class="btn btn-ghost" href="https://github.com/saeed-s-almalki" target="_blank" rel="noopener" data-i18n="hero_cta2">◆ View GitHub</a>
+    </div>
+  </div>
+  <div class="scroll-hint"><div class="mouse"></div><span data-i18n="scroll">scroll</span></div>
+</header>
+
+<section id="about">
+  <div class="wrap">
+    <div class="sec-tag reveal" data-i18n="about_tag">01 — WHO I AM</div>
+    <h2 class="sec-title reveal" data-i18n="about_title">Infrastructure that stays up.<br>Security that's built in.</h2>
+    <div class="about-grid">
+      <div class="about-txt reveal">
+        <p data-i18n="about_p1">I design, administer, and harden complex <strong>hybrid infrastructure</strong> across Windows Server, Active Directory, Hyper-V, Nutanix HCI, Citrix VDI, and Microsoft Azure — with a strong focus on reliability, high availability, and secure operations.</p>
+        <p data-i18n="about_p2">Operating in a <strong>regulated banking context</strong>, I enforce MFA &amp; least-privilege access, apply security hardening baselines, manage privileged access workflows, and drive vulnerability remediation across production and DR environments — aligned with the <strong>SAMA Cybersecurity Framework</strong> and <strong>NCA Essential Cybersecurity Controls (ECC)</strong>.</p>
+        <p data-i18n="about_p3">I keep growing hands-on: I built a cloud-native <strong>mini-SOC on Microsoft Sentinel</strong> (KQL detections mapped to MITRE ATT&amp;CK, Infrastructure-as-Code) and a <strong>home-network monitoring &amp; DNS-filtering</strong> system on Docker — both open-sourced. This security-aware mindset makes me a stronger infrastructure engineer.</p>
+      </div>
+      <div class="info-card reveal">
+        <div class="info-row"><span class="k" data-i18n="info_loc">Location</span><span class="v" data-i18n="info_loc_v">Riyadh, Saudi Arabia</span></div>
+        <div class="info-row"><span class="k" data-i18n="info_role">Role</span><span class="v" data-i18n="info_role_v">Systems / Infra Engineer</span></div>
+        <div class="info-row"><span class="k" data-i18n="info_exp">Experience</span><span class="v" data-i18n="info_exp_v">5+ years</span></div>
+        <div class="info-row"><span class="k" data-i18n="info_deg">Degree</span><span class="v" data-i18n="info_deg_v">BSc Computer Science</span></div>
+        <div class="info-row"><span class="k" data-i18n="info_fw">Frameworks</span><span class="v">ITIL · SAMA · NCA ECC</span></div>
+        <div class="info-row"><span class="k" data-i18n="info_status">Status</span><span class="v chip-ok" data-i18n="info_status_v">● Open to work</span></div>
+      </div>
+    </div>
+    <div class="stats">
+      <div class="stat reveal"><div class="num" data-count="5" data-suffix="+">0</div><div class="lbl" data-i18n="stat1">Years in Infrastructure</div></div>
+      <div class="stat reveal"><div class="num" data-count="3" data-suffix="+ yrs">0</div><div class="lbl" data-i18n="stat2">Enterprise Banking (Riyad Bank)</div></div>
+      <div class="stat reveal"><div class="num" data-count="10" data-suffix="+">0</div><div class="lbl" data-i18n="stat3">Professional Certifications</div></div>
+      <div class="stat reveal"><div class="num" data-count="2" data-suffix="">0</div><div class="lbl" data-i18n="stat4">Open-Source Lab Projects</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <div class="sec-tag reveal" data-i18n="skills_tag">02 — CAPABILITIES</div>
+    <h2 class="sec-title reveal" data-i18n="skills_title">Technical Stack</h2>
+    <p class="sec-intro reveal" data-i18n="skills_intro">The tools and platforms I use to run production and disaster-recovery environments at enterprise scale.</p>
+    <div class="skills-grid">
+      <div class="skill-card reveal"><div class="ico">🖥️</div><h3 data-i18n="sk1">Systems &amp; Identity</h3><div class="tags"><span class="tag">Windows Server</span><span class="tag">Active Directory</span><span class="tag">DNS / DHCP</span><span class="tag">Domain Controllers</span><span class="tag">MFA</span><span class="tag">MDM</span></div></div>
+      <div class="skill-card reveal"><div class="ico">🧩</div><h3 data-i18n="sk2">Virtualization &amp; VDI</h3><div class="tags"><span class="tag">Hyper-V</span><span class="tag">Nutanix HCI / AHV</span><span class="tag">VMware vCenter</span><span class="tag">Citrix VDI</span><span class="tag">XenMobile</span><span class="tag">MCS Provisioning</span></div></div>
+      <div class="skill-card reveal"><div class="ico">☁️</div><h3 data-i18n="sk3">Cloud</h3><div class="tags"><span class="tag">Microsoft Azure</span><span class="tag">AWS</span><span class="tag" data-i18n="sk3t1">Cloud Migration</span><span class="tag" data-i18n="sk3t2">Hybrid Infra</span><span class="tag">IaC</span></div></div>
+      <div class="skill-card reveal"><div class="ico">🛡️</div><h3 data-i18n="sk4">Security &amp; Compliance</h3><div class="tags"><span class="tag">Microsoft Sentinel</span><span class="tag">KQL</span><span class="tag">MITRE ATT&amp;CK</span><span class="tag" data-i18n="sk4t1">Hardening Baselines</span><span class="tag">SAMA</span><span class="tag">NCA ECC</span></div></div>
+      <div class="skill-card reveal"><div class="ico">⚙️</div><h3 data-i18n="sk5">Automation &amp; DevOps</h3><div class="tags"><span class="tag">Docker</span><span class="tag">Ansible</span><span class="tag">PowerShell</span><span class="tag">Python</span><span class="tag">Linux</span><span class="tag">Docker Compose</span></div></div>
+      <div class="skill-card reveal"><div class="ico">📶</div><h3 data-i18n="sk6">Networking &amp; Ops</h3><div class="tags"><span class="tag">Networking (CCNA)</span><span class="tag">ITIL</span><span class="tag" data-i18n="sk6t1">Backup &amp; Recovery</span><span class="tag">DR / HA</span><span class="tag" data-i18n="sk6t2">Monitoring</span><span class="tag">BMC Remedy</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="wrap">
+    <div class="sec-tag reveal" data-i18n="exp_tag">03 — CAREER</div>
+    <h2 class="sec-title reveal" data-i18n="exp_title">Experience</h2>
+    <p class="sec-intro reveal" data-i18n="exp_intro">From front-line IT support to running virtualized infrastructure for one of Saudi Arabia's leading banks and a government entity.</p>
+    <div class="timeline">
+      <div class="tl-item reveal">
+        <div class="tl-top">
+          <div><div class="tl-role"><span data-i18n="exp1_role">System Engineer</span> <span class="badge-now" data-i18n="badge_now">NOW</span></div><div class="tl-co" data-i18n="exp1_co">Government Entity · Full-time</div></div>
+          <div class="tl-date">Feb 2025 — Present</div>
+        </div>
+        <div class="tl-loc" data-i18n="exp1_loc">Riyadh, Saudi Arabia · On-site</div>
+        <ul class="tl-list">
+          <li data-i18n="exp1_b1">Administer virtualized infrastructure across Hyper-V, Nutanix HCI &amp; VMware vCenter — full VM lifecycle (provision, patch, maintain).</li>
+          <li data-i18n="exp1_b2">Plan and execute server migrations to the cloud, modernizing on-prem and cloud workloads.</li>
+          <li data-i18n="exp1_b3">Operate core identity &amp; network services (AD, DNS, DHCP) with high domain-controller availability.</li>
+          <li data-i18n="exp1_b4">Enforce Microsoft MFA and apply security baselines across production &amp; DR systems.</li>
+          <li data-i18n="exp1_b5">Lead departmental IT projects end-to-end, from design through delivery.</li>
+        </ul>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tl-top">
+          <div><div class="tl-role" data-i18n="exp2_role">Infrastructure Administrator (Computing)</div><div class="tl-co" data-i18n="exp2_co">Riyad Bank · Full-time</div></div>
+          <div class="tl-date">2022 — 2025</div>
+        </div>
+        <div class="tl-loc" data-i18n="exp2_loc">Riyadh, Saudi Arabia · On-site · 3 yrs 5 mos</div>
+        <ul class="tl-list">
+          <li data-i18n="exp2_b1">Windows Server installation, configuration, administration, upgrades &amp; troubleshooting.</li>
+          <li data-i18n="exp2_b2">Managed Nutanix clusters and migration activities; ran MCS provisioning.</li>
+          <li data-i18n="exp2_b3">Performed health checks and remediated violations on production &amp; DR servers.</li>
+          <li data-i18n="exp2_b4">Deployed Citrix sites phase-wise; configured XenMobile &amp; MDM; ran POCs into production.</li>
+          <li data-i18n="exp2_b5">Monitored systems for stability and knowledge-transferred to Citrix admins.</li>
+        </ul>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tl-top">
+          <div><div class="tl-role" data-i18n="exp3_role">Administrator — VDI &amp; Mobility</div><div class="tl-co" data-i18n="exp3_co">Riyad Bank · Internship</div></div>
+          <div class="tl-date">2022 — 2023</div>
+        </div>
+        <div class="tl-loc" data-i18n="exp3_loc">Riyadh, Saudi Arabia · On-site</div>
+        <ul class="tl-list">
+          <li data-i18n="exp3_b1">Provisioned Citrix VDI machines and managed user access via Citrix / AD.</li>
+          <li data-i18n="exp3_b2">Published and delivered business applications; supported MDM solutions.</li>
+          <li data-i18n="exp3_b3">Monitored user &amp; application behavior with Citrix Director; ran maintenance windows.</li>
+        </ul>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tl-top">
+          <div><div class="tl-role" data-i18n="exp4_role">IT Support</div><div class="tl-co" data-i18n="exp4_co">Ministry of Justice — KSA · Full-time</div></div>
+          <div class="tl-date">2019 — 2021</div>
+        </div>
+        <div class="tl-loc" data-i18n="exp4_loc">Riyadh Region · 1 yr 11 mos</div>
+        <ul class="tl-list">
+          <li data-i18n="exp4_b1">OS installations, drivers, updates &amp; application deployment per user requirements.</li>
+          <li data-i18n="exp4_b2">Resolved Microsoft Office issues and managed incidents via BMC Remedy ticketing.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="certs">
+  <div class="wrap">
+    <div class="sec-tag reveal" data-i18n="certs_tag">04 — CREDENTIALS</div>
+    <h2 class="sec-title reveal" data-i18n="certs_title">Licenses &amp; Certifications</h2>
+    <p class="sec-intro reveal" data-i18n="certs_intro">Vendor-certified across virtualization, cloud, networking, and security.</p>
+    <div class="cert-grid">
+      <div class="cert prog reveal"><span class="cico">🛡️</span><div><h4>CompTIA Security+ (SY0-701)</h4><div class="issuer">CompTIA</div><div class="yr" data-i18n="cert_prog">In Progress · Exam Scheduled</div></div></div>
+      <div class="cert reveal"><span class="cico">🧩</span><div><h4>Nutanix Certified Professional — Multicloud Infra 6</h4><div class="issuer">Nutanix</div><div class="yr">2024</div></div></div>
+      <div class="cert reveal"><span class="cico">🖥️</span><div><h4>Citrix Certified Professional — Virtualization (CCP-V)</h4><div class="issuer">Citrix</div><div class="yr">2024</div></div></div>
+      <div class="cert reveal"><span class="cico">⚙️</span><div><h4>Red Hat — Automation with Ansible (RH294)</h4><div class="issuer">Red Hat</div><div class="yr">2024</div></div></div>
+      <div class="cert reveal"><span class="cico">🏛️</span><div><h4 data-i18n="cert_sce">Saudi Council of Engineers (SCE)</h4><div class="issuer">الهيئة السعودية للمهندسين</div><div class="yr">2024 · ID 1084827</div></div></div>
+      <div class="cert reveal"><span class="cico">🧩</span><div><h4>Nutanix Certified Associate 6</h4><div class="issuer">Nutanix</div><div class="yr">2024</div></div></div>
+      <div class="cert reveal"><span class="cico">🖥️</span><div><h4>Citrix Certified Associate — Virtualization</h4><div class="issuer">Citrix</div><div class="yr">2023</div></div></div>
+      <div class="cert reveal"><span class="cico">📶</span><div><h4>CCNA</h4><div class="issuer">Cisco</div><div class="yr">2023</div></div></div>
+      <div class="cert reveal"><span class="cico">🔐</span><div><h4>ISC2 Candidate</h4><div class="issuer">ISC2</div><div class="yr">2023</div></div></div>
+      <div class="cert reveal"><span class="cico">☁️</span><div><h4 data-i18n="cert_gcp">Google Cloud Developers — Certificate of Attendance</h4><div class="issuer">Google Cloud · KSA</div><div class="yr">2022</div></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <div class="sec-tag reveal" data-i18n="proj_tag">05 — LABS</div>
+    <h2 class="sec-title reveal" data-i18n="proj_title">Open-Source Projects</h2>
+    <p class="sec-intro reveal" data-i18n="proj_intro">Hands-on labs where I turn real infrastructure and security concepts into reproducible, documented systems.</p>
+    <div class="proj-grid">
+      <a class="proj reveal" href="https://github.com/saeed-s-almalki/azure-sentinel-mini-soc" target="_blank" rel="noopener">
+        <div class="proj-top"><span class="proj-ico">🛰️</span><span class="proj-link">GitHub ↗</span></div>
+        <h3>Azure Sentinel Mini-SOC</h3>
+        <p data-i18n="proj1_desc">A cloud-native Security Operations Center on Microsoft Sentinel: log ingestion, KQL detections mapped to MITRE ATT&amp;CK, and end-to-end incident investigation — deployed as Infrastructure-as-Code.</p>
+        <div class="tags"><span class="tag">Azure</span><span class="tag">Sentinel</span><span class="tag">KQL</span><span class="tag">MITRE ATT&amp;CK</span><span class="tag">IaC</span></div>
+      </a>
+      <a class="proj reveal" href="https://github.com/saeed-s-almalki/homenet-monitor" target="_blank" rel="noopener">
+        <div class="proj-top"><span class="proj-ico">📡</span><span class="proj-link">GitHub ↗</span></div>
+        <h3>HomeNet Monitor &amp; DNS Filtering</h3>
+        <p data-i18n="proj2_desc">Self-hosted network monitoring and network-wide DNS filtering with NetAlertX + Pi-hole on Docker: automatic device discovery, new-device alerts, and one-click domain blocking across every device.</p>
+        <div class="tags"><span class="tag">Docker</span><span class="tag">Pi-hole</span><span class="tag">NetAlertX</span><span class="tag">Linux</span><span class="tag" data-i18n="proj2_t">Networking</span></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="contact">
+  <div class="wrap">
+    <div class="sec-tag reveal" style="justify-content:center" data-i18n="contact_tag">06 — GET IN TOUCH</div>
+    <h2 class="reveal" data-i18n="contact_title">Let's build something<br>reliable together.</h2>
+    <p class="reveal" data-i18n="contact_p">Open to Senior Infrastructure &amp; Systems Engineering roles in Saudi Arabia. Always happy to connect.</p>
+    <div class="social reveal">
+      <a href="https://www.linkedin.com/in/saeedalmalki" target="_blank" rel="noopener">in · LinkedIn</a>
+      <a href="https://github.com/saeed-s-almalki" target="_blank" rel="noopener">◆ GitHub</a>
+      <a href="#top" data-i18n="back_top">↑ Back to top</a>
+    </div>
+  </div>
+</section>
+
+<footer><div class="wrap"><span data-i18n="footer">© 2026 Saeed AlMalki · Built for the region's digital backbone · Riyadh, KSA</span></div></footer>
+
+<script>
+  const I18N={
+    nav_about:{en:"About",ar:"نبذة"},nav_skills:{en:"Skills",ar:"المهارات"},nav_exp:{en:"Experience",ar:"الخبرة"},nav_certs:{en:"Certifications",ar:"الشهادات"},nav_proj:{en:"Projects",ar:"المشاريع"},nav_contact:{en:"Contact",ar:"تواصل"},
+    hero_status:{en:"Open to Senior Infrastructure / Systems Engineering roles · Riyadh",ar:"متاح لوظائف هندسة بنية تحتية / أنظمة أول · الرياض"},
+    hero_sub:{en:"Senior IT Infrastructure & Systems Engineer with 5+ years designing, operating, and securing enterprise environments — including 3+ years at Riyad Bank. I build reliable, highly-available, and secure hybrid infrastructure.",ar:"مهندس بنية تحتية وأنظمة أول بخبرة +5 سنوات في تصميم وتشغيل وتأمين البيئات المؤسسية — منها +3 سنوات في بنك الرياض. أبني بنية تحتية موثوقة وعالية التوفّر وآمنة."},
+    hero_cta1:{en:"Let's connect →",ar:"تواصل معي →"},hero_cta2:{en:"◆ View GitHub",ar:"◆ حسابي في GitHub"},scroll:{en:"scroll",ar:"مرّر"},
+    about_tag:{en:"01 — WHO I AM",ar:"٠١ — من أنا"},
+    about_title:{en:"Infrastructure that stays up.<br>Security that's built in.",ar:"بنية تحتية ما تطيح.<br>وأمن مدمج من الأساس."},
+    about_p1:{en:"I design, administer, and harden complex <strong>hybrid infrastructure</strong> across Windows Server, Active Directory, Hyper-V, Nutanix HCI, Citrix VDI, and Microsoft Azure — with a strong focus on reliability, high availability, and secure operations.",ar:"أصمّم وأدير وأحصّن <strong>بنية تحتية هجينة</strong> معقّدة عبر Windows Server و Active Directory و Hyper-V و Nutanix HCI و Citrix VDI و Microsoft Azure — مع تركيز قوي على الموثوقية والتوفّر العالي والتشغيل الآمن."},
+    about_p2:{en:"Operating in a <strong>regulated banking context</strong>, I enforce MFA & least-privilege access, apply security hardening baselines, manage privileged access workflows, and drive vulnerability remediation across production and DR environments — aligned with the <strong>SAMA Cybersecurity Framework</strong> and <strong>NCA Essential Cybersecurity Controls (ECC)</strong>.",ar:"أعمل في <strong>بيئة مصرفية خاضعة للتنظيم</strong>، أفرض المصادقة الثنائية ومبدأ أقل الصلاحيات، وأطبّق معايير التحصين الأمني، وأدير صلاحيات الوصول المميّز، وأقود معالجة الثغرات عبر بيئات الإنتاج والتعافي — بما يتوافق مع <strong>إطار ساما للأمن السيبراني</strong> و<strong>الضوابط الأساسية للأمن السيبراني (ECC) من الهيئة الوطنية</strong>."},
+    about_p3:{en:"I keep growing hands-on: I built a cloud-native <strong>mini-SOC on Microsoft Sentinel</strong> (KQL detections mapped to MITRE ATT&CK, Infrastructure-as-Code) and a <strong>home-network monitoring & DNS-filtering</strong> system on Docker — both open-sourced. This security-aware mindset makes me a stronger infrastructure engineer.",ar:"أطوّر مهاراتي عملياً باستمرار: بنيت <strong>مركز عمليات أمنية مصغّر (mini-SOC) على Microsoft Sentinel</strong> (كشوفات KQL مرتبطة بـMITRE ATT&CK وبنية تحتية ككود) ونظام <strong>مراقبة شبكة منزلية وفلترة DNS</strong> على Docker — كلاهما مفتوح المصدر. هذا الوعي الأمني يخليني مهندس بنية تحتية أقوى."},
+    info_loc:{en:"Location",ar:"الموقع"},info_loc_v:{en:"Riyadh, Saudi Arabia",ar:"الرياض، السعودية"},
+    info_role:{en:"Role",ar:"الدور"},info_role_v:{en:"Systems / Infra Engineer",ar:"مهندس أنظمة / بنية تحتية"},
+    info_exp:{en:"Experience",ar:"الخبرة"},info_exp_v:{en:"5+ years",ar:"+5 سنوات"},
+    info_deg:{en:"Degree",ar:"الشهادة"},info_deg_v:{en:"BSc Computer Science",ar:"بكالوريوس علوم حاسب"},
+    info_fw:{en:"Frameworks",ar:"الأطر"},info_status:{en:"Status",ar:"الحالة"},info_status_v:{en:"● Open to work",ar:"● متاح للعمل"},
+    stat1:{en:"Years in Infrastructure",ar:"سنوات في البنية التحتية"},stat2:{en:"Enterprise Banking (Riyad Bank)",ar:"قطاع مصرفي (بنك الرياض)"},stat3:{en:"Professional Certifications",ar:"شهادات احترافية"},stat4:{en:"Open-Source Lab Projects",ar:"مشاريع مفتوحة المصدر"},
+    skills_tag:{en:"02 — CAPABILITIES",ar:"٠٢ — القدرات"},skills_title:{en:"Technical Stack",ar:"المهارات التقنية"},skills_intro:{en:"The tools and platforms I use to run production and disaster-recovery environments at enterprise scale.",ar:"الأدوات والمنصّات اللي أشغّل فيها بيئات الإنتاج والتعافي من الكوارث على مستوى مؤسسي."},
+    sk1:{en:"Systems & Identity",ar:"الأنظمة والهوية"},sk2:{en:"Virtualization & VDI",ar:"الأنظمة الافتراضية وVDI"},sk3:{en:"Cloud",ar:"الحوسبة السحابية"},sk4:{en:"Security & Compliance",ar:"الأمن والامتثال"},sk5:{en:"Automation & DevOps",ar:"الأتمتة و DevOps"},sk6:{en:"Networking & Ops",ar:"الشبكات والتشغيل"},
+    sk3t1:{en:"Cloud Migration",ar:"ترحيل سحابي"},sk3t2:{en:"Hybrid Infra",ar:"بنية هجينة"},sk4t1:{en:"Hardening Baselines",ar:"معايير التحصين"},sk6t1:{en:"Backup & Recovery",ar:"النسخ والاسترجاع"},sk6t2:{en:"Monitoring",ar:"المراقبة"},
+    exp_tag:{en:"03 — CAREER",ar:"٠٣ — المسيرة"},exp_title:{en:"Experience",ar:"الخبرة"},exp_intro:{en:"From front-line IT support to running virtualized infrastructure for one of Saudi Arabia's leading banks and a government entity.",ar:"من الدعم الفني المباشر إلى تشغيل البنية التحتية الافتراضية لأحد أكبر بنوك السعودية وجهة حكومية."},
+    badge_now:{en:"NOW",ar:"الآن"},
+    exp1_role:{en:"System Engineer",ar:"مهندس أنظمة"},exp1_co:{en:"Government Entity · Full-time",ar:"جهة حكومية · دوام كامل"},exp1_loc:{en:"Riyadh, Saudi Arabia · On-site",ar:"الرياض، السعودية · حضوري"},
+    exp1_b1:{en:"Administer virtualized infrastructure across Hyper-V, Nutanix HCI & VMware vCenter — full VM lifecycle (provision, patch, maintain).",ar:"إدارة البنية التحتية الافتراضية عبر Hyper-V و Nutanix HCI و VMware vCenter — دورة حياة كاملة للأجهزة الافتراضية (تجهيز، ترقيع، صيانة)."},
+    exp1_b2:{en:"Plan and execute server migrations to the cloud, modernizing on-prem and cloud workloads.",ar:"تخطيط وتنفيذ ترحيل الخوادم إلى السحابة وتحديث أحمال العمل المحلية والسحابية."},
+    exp1_b3:{en:"Operate core identity & network services (AD, DNS, DHCP) with high domain-controller availability.",ar:"تشغيل خدمات الهوية والشبكة الأساسية (AD و DNS و DHCP) مع توفّر عالٍ لمتحكّمات النطاق."},
+    exp1_b4:{en:"Enforce Microsoft MFA and apply security baselines across production & DR systems.",ar:"فرض المصادقة الثنائية من Microsoft وتطبيق معايير الأمان عبر أنظمة الإنتاج والتعافي."},
+    exp1_b5:{en:"Lead departmental IT projects end-to-end, from design through delivery.",ar:"قيادة مشاريع تقنية المعلومات في القسم من البداية للنهاية، من التصميم حتى التسليم."},
+    exp2_role:{en:"Infrastructure Administrator (Computing)",ar:"مسؤول بنية تحتية (حوسبة)"},exp2_co:{en:"Riyad Bank · Full-time",ar:"بنك الرياض · دوام كامل"},exp2_loc:{en:"Riyadh, Saudi Arabia · On-site · 3 yrs 5 mos",ar:"الرياض، السعودية · حضوري · 3 سنوات و5 أشهر"},
+    exp2_b1:{en:"Windows Server installation, configuration, administration, upgrades & troubleshooting.",ar:"تثبيت وتهيئة وإدارة وترقية Windows Server ومعالجة الأعطال."},
+    exp2_b2:{en:"Managed Nutanix clusters and migration activities; ran MCS provisioning.",ar:"إدارة عناقيد Nutanix وأنشطة الترحيل؛ وتشغيل تجهيز MCS."},
+    exp2_b3:{en:"Performed health checks and remediated violations on production & DR servers.",ar:"إجراء فحوصات صحّة الأنظمة ومعالجة المخالفات على خوادم الإنتاج والتعافي."},
+    exp2_b4:{en:"Deployed Citrix sites phase-wise; configured XenMobile & MDM; ran POCs into production.",ar:"نشر مواقع Citrix على مراحل؛ وتهيئة XenMobile و MDM؛ وتنفيذ نماذج إثبات المفهوم للإنتاج."},
+    exp2_b5:{en:"Monitored systems for stability and knowledge-transferred to Citrix admins.",ar:"مراقبة استقرار الأنظمة ونقل المعرفة لمسؤولي Citrix."},
+    exp3_role:{en:"Administrator — VDI & Mobility",ar:"مسؤول — VDI والتنقّل"},exp3_co:{en:"Riyad Bank · Internship",ar:"بنك الرياض · تدريب"},exp3_loc:{en:"Riyadh, Saudi Arabia · On-site",ar:"الرياض، السعودية · حضوري"},
+    exp3_b1:{en:"Provisioned Citrix VDI machines and managed user access via Citrix / AD.",ar:"تجهيز أجهزة Citrix VDI وإدارة وصول المستخدمين عبر Citrix / AD."},
+    exp3_b2:{en:"Published and delivered business applications; supported MDM solutions.",ar:"نشر وتسليم تطبيقات الأعمال؛ ودعم حلول MDM."},
+    exp3_b3:{en:"Monitored user & application behavior with Citrix Director; ran maintenance windows.",ar:"مراقبة سلوك المستخدمين والتطبيقات عبر Citrix Director؛ وتنفيذ نوافذ الصيانة."},
+    exp4_role:{en:"IT Support",ar:"دعم فني"},exp4_co:{en:"Ministry of Justice — KSA · Full-time",ar:"وزارة العدل — السعودية · دوام كامل"},exp4_loc:{en:"Riyadh Region · 1 yr 11 mos",ar:"منطقة الرياض · سنة و11 شهر"},
+    exp4_b1:{en:"OS installations, drivers, updates & application deployment per user requirements.",ar:"تثبيت أنظمة التشغيل والتعريفات والتحديثات ونشر التطبيقات حسب متطلبات المستخدمين."},
+    exp4_b2:{en:"Resolved Microsoft Office issues and managed incidents via BMC Remedy ticketing.",ar:"حل مشاكل Microsoft Office وإدارة البلاغات عبر نظام تذاكر BMC Remedy."},
+    certs_tag:{en:"04 — CREDENTIALS",ar:"٠٤ — المؤهلات"},certs_title:{en:"Licenses & Certifications",ar:"الرخص والشهادات"},certs_intro:{en:"Vendor-certified across virtualization, cloud, networking, and security.",ar:"معتمد من كبرى الشركات في الأنظمة الافتراضية والسحابة والشبكات والأمن."},
+    cert_prog:{en:"In Progress · Exam Scheduled",ar:"قيد الإنجاز · موعد الاختبار محجوز"},cert_sce:{en:"Saudi Council of Engineers (SCE)",ar:"الهيئة السعودية للمهندسين (SCE)"},cert_gcp:{en:"Google Cloud Developers — Certificate of Attendance",ar:"مطوّرو Google Cloud — شهادة حضور"},
+    proj_tag:{en:"05 — LABS",ar:"٠٥ — المعامل"},proj_title:{en:"Open-Source Projects",ar:"مشاريع مفتوحة المصدر"},proj_intro:{en:"Hands-on labs where I turn real infrastructure and security concepts into reproducible, documented systems.",ar:"معامل عملية أحوّل فيها مفاهيم البنية التحتية والأمن إلى أنظمة قابلة لإعادة الإنتاج وموثّقة."},
+    proj1_desc:{en:"A cloud-native Security Operations Center on Microsoft Sentinel: log ingestion, KQL detections mapped to MITRE ATT&CK, and end-to-end incident investigation — deployed as Infrastructure-as-Code.",ar:"مركز عمليات أمنية سحابي على Microsoft Sentinel: استقبال السجلّات، كشوفات KQL مرتبطة بـMITRE ATT&CK، والتحقيق الكامل في الحوادث — منشور كبنية تحتية ككود."},
+    proj2_desc:{en:"Self-hosted network monitoring and network-wide DNS filtering with NetAlertX + Pi-hole on Docker: automatic device discovery, new-device alerts, and one-click domain blocking across every device.",ar:"مراقبة شبكة ذاتية الاستضافة وفلترة DNS على مستوى الشبكة باستخدام NetAlertX + Pi-hole على Docker: اكتشاف تلقائي للأجهزة، تنبيهات للأجهزة الجديدة، وحجب أي نطاق بضغطة واحدة على كل الأجهزة."},
+    proj2_t:{en:"Networking",ar:"شبكات"},
+    contact_tag:{en:"06 — GET IN TOUCH",ar:"٠٦ — تواصل"},contact_title:{en:"Let's build something<br>reliable together.",ar:"خلّنا نبني شي<br>موثوق مع بعض."},contact_p:{en:"Open to Senior Infrastructure & Systems Engineering roles in Saudi Arabia. Always happy to connect.",ar:"متاح لوظائف هندسة بنية تحتية وأنظمة أول في السعودية. يسعدني التواصل دائماً."},
+    back_top:{en:"↑ Back to top",ar:"↑ للأعلى"},footer:{en:"© 2026 Saeed AlMalki · Built for the region's digital backbone · Riyadh, KSA",ar:"© 2026 سعيد المالكي · بُني للعمود الفقري الرقمي للمنطقة · الرياض، السعودية"}
+  };
+  const TYPED={en:['IT Infrastructure & Systems Engineer','Windows · Active Directory · Virtualization','Azure · Nutanix · VMware · Citrix','Security-aware. Automation-driven.'],ar:['مهندس بنية تحتية وأنظمة','ويندوز · Active Directory · الأنظمة الافتراضية','Azure · Nutanix · VMware · Citrix','وعي أمني · وأتمتة']};
+  let LANG='en';
+  function applyLang(l){
+    LANG=l;
+    document.documentElement.lang=l;
+    document.documentElement.dir=(l==='ar')?'rtl':'ltr';
+    document.getElementById('langBtn').textContent=(l==='ar')?'EN':'العربية';
+    document.querySelectorAll('[data-i18n]').forEach(el=>{
+      const k=el.getAttribute('data-i18n'); if(I18N[k]) el.innerHTML=I18N[k][l];
+    });
+    ri=0;ci=0;del=false; // reset typing
+    try{localStorage.setItem('lang',l)}catch(e){}
+  }
+  document.getElementById('langBtn').addEventListener('click',()=>applyLang(LANG==='en'?'ar':'en'));
+
+  const nav=document.getElementById('nav');
+  addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>40));
+  const burger=document.getElementById('burger'),links=document.getElementById('navlinks');
+  burger.addEventListener('click',()=>{burger.classList.toggle('x');links.classList.toggle('open')});
+  links.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{burger.classList.remove('x');links.classList.remove('open')}));
+
+  const el=document.getElementById('typed');let ri=0,ci=0,del=false;
+  (function type(){
+    const arr=TYPED[LANG],w=arr[ri%arr.length];
+    el.textContent=del?w.slice(0,ci--):w.slice(0,ci++);
+    if(!del&&ci===w.length+1){del=true;setTimeout(type,1500);return;}
+    if(del&&ci===0){del=false;ri=(ri+1)%arr.length;}
+    setTimeout(type,del?38:70);
+  })();
+
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.15});
+  document.querySelectorAll('.reveal').forEach(r=>io.observe(r));
+  const cio=new IntersectionObserver(es=>es.forEach(e=>{
+    if(!e.isIntersecting)return;
+    const n=e.target,t=+n.dataset.count,sfx=n.dataset.suffix||'';let c=0;
+    const step=()=>{c+=Math.max(1,t/28);if(c>=t){n.textContent=t+sfx;}else{n.textContent=Math.floor(c)+sfx;requestAnimationFrame(step);}};
+    step();cio.unobserve(n);
+  }),{threshold:.6});
+  document.querySelectorAll('.num').forEach(n=>cio.observe(n));
+
+  document.querySelectorAll('.proj').forEach(p=>p.addEventListener('mousemove',e=>{
+    const r=p.getBoundingClientRect();p.style.setProperty('--mx',(e.clientX-r.left)+'px');p.style.setProperty('--my',(e.clientY-r.top)+'px');
+  }));
+
+  const cv=document.getElementById('net'),cx=cv.getContext('2d');let W,H,pts;
+  function init(){W=cv.width=innerWidth;H=cv.height=innerHeight;const n=Math.min(70,Math.floor(W*H/22000));pts=Array.from({length:n},()=>({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.35,vy:(Math.random()-.5)*.35}));}
+  init();addEventListener('resize',init);
+  function loop(){cx.clearRect(0,0,W,H);for(let i=0;i<pts.length;i++){const p=pts[i];p.x+=p.vx;p.y+=p.vy;if(p.x<0||p.x>W)p.vx*=-1;if(p.y<0||p.y>H)p.vy*=-1;for(let j=i+1;j<pts.length;j++){const q=pts[j],dx=p.x-q.x,dy=p.y-q.y,d=Math.hypot(dx,dy);if(d<130){cx.strokeStyle='rgba(46,230,200,'+(1-d/130)*.22+')';cx.lineWidth=1;cx.beginPath();cx.moveTo(p.x,p.y);cx.lineTo(q.x,q.y);cx.stroke();}}cx.fillStyle='rgba(79,155,255,.6)';cx.beginPath();cx.arc(p.x,p.y,1.6,0,7);cx.fill();}requestAnimationFrame(loop);}
+  loop();
+
+  try{const saved=localStorage.getItem('lang');if(saved==='ar')applyLang('ar');}catch(e){}
+</script>
+</body>
+</html>
