@@ -174,9 +174,32 @@
     .burger.x span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
   }
   @media(max-width:520px){.stats{grid-template-columns:1fr 1fr}.cta{flex-direction:column}.btn{justify-content:center}}
+
+  /* ---- app-shell polish (SPA feel) ---- */
+  #boot{position:fixed;inset:0;z-index:999;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;transition:opacity .6s ease,visibility .6s}
+  #boot.hide{opacity:0;visibility:hidden}
+  .boot-ring{width:56px;height:56px;border-radius:50%;border:3px solid rgba(120,160,220,.15);border-top-color:var(--accent);border-right-color:var(--accent-2);animation:spin .85s linear infinite}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .boot-mono{font-family:'Space Grotesk';font-weight:700;letter-spacing:1px;font-size:15px;color:var(--muted)}
+  .boot-mono b{font-weight:700;background:linear-gradient(120deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent}
+  #progress{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--accent),var(--accent-2),var(--accent-3));z-index:60;box-shadow:0 0 10px var(--glow)}
+  .dots{position:fixed;right:22px;top:50%;transform:translateY(-50%);z-index:40;display:flex;flex-direction:column;gap:14px}
+  html[dir="rtl"] .dots{right:auto;left:22px}
+  .dots button{width:11px;height:11px;border-radius:50%;border:1px solid var(--line-strong);background:transparent;cursor:pointer;padding:0;transition:.3s}
+  .dots button:hover{border-color:var(--accent);transform:scale(1.2)}
+  .dots button.active{background:var(--accent);border-color:var(--accent);box-shadow:0 0 10px var(--glow)}
+  .nav-links a.active{color:var(--text)}
+  .nav-links a.active::after{width:100%}
+  .btn{position:relative;overflow:hidden}
+  .ripple{position:absolute;border-radius:50%;transform:scale(0);background:rgba(255,255,255,.35);animation:rip .6s linear;pointer-events:none}
+  @keyframes rip{to{transform:scale(2.6);opacity:0}}
+  @media(max-width:760px){.dots{display:none}}
 </style>
 </head>
 <body>
+<div id="boot"><div class="boot-ring"></div><div class="boot-mono">SAEED<b>.AlMalki</b></div></div>
+<div id="progress"></div>
+<div class="dots" id="dots"></div>
 <canvas id="net"></canvas>
 
 <nav id="nav">
@@ -479,6 +502,21 @@
   loop();
 
   try{const saved=localStorage.getItem('lang');if(saved==='ar')applyLang('ar');}catch(e){}
+
+  // ---- app-shell polish ----
+  addEventListener('load',()=>setTimeout(()=>{const b=document.getElementById('boot');if(b)b.classList.add('hide');},700));
+  const prog=document.getElementById('progress');
+  const dh=document.documentElement;
+  const onScrollUI=()=>{ const p=dh.scrollTop/(dh.scrollHeight-dh.clientHeight)*100; prog.style.width=p+'%'; spy(); };
+  const secs=['top','about','skills','experience','certs','projects','contact'];
+  const dotsEl=document.getElementById('dots');
+  secs.forEach(id=>{ const b=document.createElement('button'); b.dataset.t=id; b.setAttribute('aria-label',id); b.onclick=()=>{const el=document.getElementById(id); if(el) el.scrollIntoView({behavior:'smooth'});}; dotsEl.appendChild(b); });
+  const navA=[...document.querySelectorAll('.nav-links a')];
+  function spy(){ let cur=secs[0]; for(const id of secs){ const el=document.getElementById(id); if(el && el.getBoundingClientRect().top<=140) cur=id; }
+    dotsEl.querySelectorAll('button').forEach(b=>b.classList.toggle('active',b.dataset.t===cur));
+    navA.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+cur)); }
+  addEventListener('scroll',onScrollUI); onScrollUI();
+  document.querySelectorAll('.btn').forEach(b=>b.addEventListener('click',e=>{ const r=b.getBoundingClientRect(); const s=document.createElement('span'); s.className='ripple'; const d=Math.max(r.width,r.height); s.style.width=s.style.height=d+'px'; s.style.left=(e.clientX-r.left-d/2)+'px'; s.style.top=(e.clientY-r.top-d/2)+'px'; b.appendChild(s); setTimeout(()=>s.remove(),600); }));
 </script>
 </body>
 </html>
