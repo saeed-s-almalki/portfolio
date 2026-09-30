@@ -56,7 +56,8 @@
   .hero-name .grad{background:linear-gradient(120deg,var(--accent),var(--accent-2) 55%,var(--accent-3));-webkit-background-clip:text;background-clip:text;color:transparent}
   .hero-ar{font-size:clamp(18px,3vw,26px);color:var(--muted);margin-top:6px;font-family:'Tajawal',sans-serif;animation:fadeUp .7s .12s both}
   .role-line{margin-top:22px;font-size:clamp(16px,2.4vw,22px);color:var(--text);font-family:'JetBrains Mono';min-height:34px;animation:fadeUp .7s .18s both;direction:ltr}
-  html[lang="ar"] .role-line{text-align:right}
+  html[lang="ar"] .role-line{text-align:right;font-family:'Tajawal',sans-serif;letter-spacing:0}
+  html[lang="ar"] #typed{unicode-bidi:isolate}
   .role-line .prompt{color:var(--accent)}
   .role-line .cursor{display:inline-block;width:9px;height:20px;background:var(--accent);margin-left:2px;vertical-align:-3px;animation:blink 1s steps(2) infinite}
   @keyframes blink{50%{opacity:0}}
@@ -166,8 +167,11 @@
 
   @media(max-width:860px){
     .about-grid{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}.proj-grid{grid-template-columns:1fr}
-    .nav-links{position:fixed;inset:0 0 0 auto;width:74%;max-width:320px;flex-direction:column;justify-content:center;gap:34px;background:rgba(9,14,25,.97);backdrop-filter:blur(20px);transform:translateX(100%);transition:.4s;border-left:1px solid var(--line)}
-    .nav-links.open{transform:none}.nav-links a{font-size:19px}
+    .nav-links{position:fixed;inset:0;width:100%;max-width:none;flex-direction:column;justify-content:flex-start;align-items:center;gap:26px;padding:92px 24px 40px;background:rgba(7,11,20,.98);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);transform:translateX(100%);transition:transform .4s ease;border-left:none;overflow-y:auto;z-index:100}
+    .nav-links.open{transform:none}.nav-links a{font-size:20px}
+    body.nav-open{overflow:hidden}
+    body.nav-open #nav{backdrop-filter:none;-webkit-backdrop-filter:none;z-index:100}
+    body.nav-open .brand,body.nav-open #langBtn,body.nav-open #burger{position:relative;z-index:110}
     .burger{display:flex}
     .burger.x span:nth-child(1){transform:translateY(7px) rotate(45deg)}
     .burger.x span:nth-child(2){opacity:0}
@@ -469,8 +473,11 @@
   const nav=document.getElementById('nav');
   addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>40));
   const burger=document.getElementById('burger'),links=document.getElementById('navlinks');
-  burger.addEventListener('click',()=>{burger.classList.toggle('x');links.classList.toggle('open')});
-  links.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{burger.classList.remove('x');links.classList.remove('open')}));
+  function openMenu(){document.body.classList.add('nav-open');burger.classList.add('x');links.classList.add('open');}
+  function closeMenu(){burger.classList.remove('x');links.classList.remove('open');
+    setTimeout(()=>{if(!links.classList.contains('open'))document.body.classList.remove('nav-open');},400);}
+  burger.addEventListener('click',()=>{links.classList.contains('open')?closeMenu():openMenu();});
+  links.querySelectorAll('a').forEach(a=>a.addEventListener('click',closeMenu));
 
   const el=document.getElementById('typed');let ri=0,ci=0,del=false;
   (function type(){
